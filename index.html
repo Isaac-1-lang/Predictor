@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projectile Range–Angle Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for plotting -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Projectile Range Angle Predictor</h1>
+      <p>
+        Empirical model with air resistance. Explore how launch angle and horizontal range are related,
+        based on experimental data.
+      </p>
+    </header>
+
+    <main>
+      <section class="controls">
+        <div class="card">
+          <h2>Predict Range from Angle</h2>
+          <label for="angleInput">Angle (degrees)</label>
+          <input id="angleInput" type="range" min="20" max="85" step="1" value="50" />
+          <div class="value-row">
+            <span id="angleValue">50°</span>
+            <span id="rangePrediction">Range ≈  m</span>
+          </div>
+          <button id="angleToRangeBtn">Update prediction</button>
+        </div>
+
+        <div class="card">
+          <h2>Predict Angle from Required Range</h2>
+          <label for="rangeInput">Required range (m)</label>
+          <input id="rangeInput" type="number" min="0" step="0.1" value="20" />
+          <div class="value-row">
+            <span id="requiredRangeLabel">20.0 m</span>
+            <span id="anglePrediction">Angle ≈  °</span>
+          </div>
+          <button id="rangeToAngleBtn">Predict angle</button>
+        </div>
+
+        <div class="card stats">
+          <h2>Model Quality (R²)</h2>
+          <p><strong>Range as function of angle:</strong> <span id="r2AngleToRange">–</span></p>
+          <p><strong>Angle as function of range:</strong> <span id="r2RangeToAngle">–</span></p>
+          <p class="note">
+            R² closer to 1 means a better fit. This is a cubic fit to a small data set, so treat
+            predictions as approximate.
+          </p>
+        </div>
+      </section>
+
+      <section class="charts">
+        <div class="chart-card">
+          <h2>Range vs Angle</h2>
+          <canvas id="angleRangeChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h2>Angle vs Range</h2>
+          <canvas id="rangeAngleChart"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Data source: student projectile motion experiment with air resistance.
+        Model: cubic polynomial regression (angle↔range).
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
