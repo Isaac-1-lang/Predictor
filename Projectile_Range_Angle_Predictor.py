@@ -10,6 +10,8 @@ This script uses simple polynomial regression to:
 - Plot the experimental data together with the fitted model curves
 """
 
+import utils.transport
+import utils.session
 import numpy as np
 import matplotlib.pyplot as plt
 
